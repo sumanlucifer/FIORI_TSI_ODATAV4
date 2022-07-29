@@ -1,0 +1,57 @@
+_schema-version: "3.2"
+ID: knpl-tsi-web
+version: 0.0.1
+modules:
+- name: knpl-tsi-web-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: knpl-tsi-web-destination-service
+    parameters:
+      content-target: true
+  - name: knpl-tsi-web_html_repo_host
+    parameters:
+      service-key:
+        name: knpl-tsi-web_html_repo_host-key
+  - name: uaa_knpl-tsi-web
+    parameters:
+      service-key:
+        name: uaa_knpl-tsi-web-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: knpl_tsi_web_knpl_tsi_web_html_repo_host
+          ServiceInstanceName: knpl-tsi-web-html5-app-host-service
+          ServiceKeyName: knpl-tsi-web_html_repo_host-key
+          sap.cloud.service: knpl-tsi-web
+        - Authentication: OAuth2UserTokenExchange
+          Name: knpl_tsi_web_uaa_knpl_tsi_web
+          ServiceInstanceName: knpl-tsi-web-xsuaa-service
+          ServiceKeyName: uaa_knpl-tsi-web-key
+          sap.cloud.service: knpl-tsi-web
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
+resources:
+- name: knpl-tsi-web-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      version: 1.0.0
+    service: destination
+    service-name: knpl-tsi-web-destination-service
+    service-plan: lite
+- name: knpl-tsi-web_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: knpl-tsi-web-html5-app-host-service
+    service-plan: app-host
+- name: uaa_knpl-tsi-web
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: knpl-tsi-web-xsuaa-service
+    service-plan: application
