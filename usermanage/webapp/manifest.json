@@ -1,0 +1,152 @@
+{
+    "_version": "1.40.0",
+    "sap.app": {
+        "id": "com.knpl.tsi.usermanagement.usermanage",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:basic",
+            "version": "1.6.7",
+            "toolsId": "d42d59f9-996c-41f1-bd7e-da2c172b9123"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/api/v2/odata.svc/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.102.1",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.f": {},
+                "sap.suite.ui.generic.template": {},
+                "sap.ui.comp": {},
+                "sap.ui.generic.app": {},
+                "sap.ui.table": {},
+                "sap.ushell": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "com.knpl.tsi.usermanagement.usermanage.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "defaultBindingMode": "TwoWay",
+                    "defaultCountMode": "Inline",
+                    "refreshAfterChange": false,
+                    "defaultUpdateMethod": "Put",
+                    "useBatch": false
+}
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "viewPath": "com.knpl.tsi.usermanagement.usermanage.view",
+                "controlId": "app",
+                "controlAggregation": "pages",
+                "bypassed": {
+                    "target": [
+                        "notFound"
+                    ]
+                },
+                "async": true
+            },
+
+            "routes": [
+                {
+                    "name": "",
+                    "pattern": "usermanage",
+                    "target": [
+                        "usermanage"
+                    ]
+                },
+                {
+                    "name": "Detail",
+                    "pattern": "Detail",
+                    "target": [
+                        "Detail"
+                    ]
+                }
+            ],
+            "targets": {
+                "usermanage": {
+                    "viewId": "usermanage",
+                    "viewName": "usermanage",
+                    "viewLevel": 1
+                }
+            },
+            "Detail": {
+                "viewName": "Detail",
+                "viewId": "Detail",
+                "viewLevel": 2
+            },
+            "notFound": {
+                "viewName": "NotFound",
+                "viewId": "notFound"
+            }
+
+
+        },
+        "rootView": {
+            "viewName": "com.knpl.tsi.usermanagement.usermanage.view.App",
+            "type": "XML",
+            "async": true,
+            "id": "app"
+        }
+    },
+    "sap.cloud": {
+        "public": true,
+        "service": "knpl-tsi-web"
+    }
+}

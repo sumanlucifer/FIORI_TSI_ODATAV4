@@ -1,0 +1,38 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+    	xmlns:u="sap.ui.unified">
+	  <Dialog id="idP" showHeader="false"  >
+      <subHeader>
+			<OverflowToolbar>
+				<SearchField liveChange=".onSearchSalesGroup" width="100%" />
+			</OverflowToolbar>
+		</subHeader>
+          	<List
+			id="idList"
+			items="{/getSalesGroupList()}"
+			selectionChange=".onSalesGrpSelectionChange"
+			mode="MultiSelect"
+			growing="true"
+			growingThreshold="5"
+			includeItemInSelection="true">
+				<headerToolbar>
+			<OverflowToolbar>
+				<content>
+					<Title text="Select Sales Group" level="H2" />
+					<ToolbarSpacer />
+				
+				</content>
+			</OverflowToolbar>
+		</headerToolbar>
+			<StandardListItem
+				title="{SALES_GRP}"
+				iconDensityAware="false"
+				iconInset="false" />
+		</List>
+    </Dialog>
+  
+
+</core:FragmentDefinition>

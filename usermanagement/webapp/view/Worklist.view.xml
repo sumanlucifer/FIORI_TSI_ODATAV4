@@ -1,0 +1,52 @@
+<mvc:View height="100%" 
+controllerName="com.knpl.tsi.usermanagement.controller.Worklist" 
+xmlns:mvc="sap.ui.core.mvc" 
+xmlns:core="sap.ui.core" 
+xmlns:layout="sap.ui.layout" 
+xmlns="sap.m" xmlns:f="sap.f" 
+xmlns:fb="sap.ui.comp.filterbar" 
+xmlns:vm="sap.ui.comp.variants" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar">
+    <f:DynamicPage busyIndicatorDelay="0" showFooter="true" busy="{objectModel>/PageBusy}" id="dynamicPageId" headerExpanded="true">
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                             <f:content>
+
+<fb:FilterBar id="filterbar" showRestoreOnFB="true" reset="onResetFilterBar" search="onSearch" useToolbar="false" showGoOnFB="true">
+
+<fb:filterGroupItems>
+<fb:FilterGroupItem groupName="__$INTERNAL$" name="group" label="{i18n>salesgroup}" visibleInFilterBar="true" class="searchFieldLabelHidden">
+                                 <fb:control>
+                                    <Input value="{path:'oSearchControl>/filterBar/salesGroup',formatter:'.formatter.fmtListProductName'}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="oProdValueHelpRequest"/>
+                                </fb:control>
+
+                                <!-- <fb:control>
+                                    <MultiComboBox items="{/getSalesGroupList()}" placeholder="{i18n>Enter} {i18n>status}" selectedKeys="{oModelControl>/filterBar/SelectedSalesGroup}">
+                                        <core:Item text="{SALES_GRP}" key="Accepted"/>
+                                    </MultiComboBox>
+                                </fb:control> -->
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem groupName="__$INTERNAL$" name="Status" label="{i18n>appstatus}" visibleInFilterBar="true" class="searchFieldLabelHidden">
+                                <fb:control>
+                                    <ComboBox selectedKey="{oSearchControl>/filterBar/ApprovalStatus}" placeholder="{i18n>Enter} {i18n>appstatus}">
+                                        <core:Item text="Not Installed" key="Not Installed"/>
+                                          <core:Item text="Installed" key="Installed"/>
+                                    </ComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+</fb:filterGroupItems>
+
+</fb:FilterBar>
+
+</f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+              <core:Fragment fragmentName="com.knpl.tsi.usermanagement.view.fragments.usermanage" type="XML"/>
+        </f:content>
+        <!-- <f:footer>
+			<OverflowToolbar>
+				   <Button text="More" press="onLoadMoreData" width="100%"/>
+			</OverflowToolbar>
+		</f:footer> -->
+    </f:DynamicPage>
+</mvc:View>

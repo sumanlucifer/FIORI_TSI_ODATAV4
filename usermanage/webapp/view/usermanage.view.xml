@@ -1,0 +1,30 @@
+<mvc:View height="100%" xmlns:smartTable="sap.ui.comp.smarttable" controllerName="com.knpl.tsi.usermanagement.usermanage.controller.usermanage" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns:layout="sap.ui.layout" xmlns="sap.m" xmlns:f="sap.f" xmlns:fb="sap.ui.comp.filterbar" xmlns:vm="sap.ui.comp.variants" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar">
+    <f:DynamicPage busyIndicatorDelay="0" busy="{oModelControl>/PageBusy}" id="dynamicPageId" headerExpanded="true">
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <fb:FilterBar showRestoreButton="false" id="filterbar" reset="onResetFilterBar" search="onFilterBarSearch" useToolbar="false" showRestoreOnFB="true">
+                        <fb:filterGroupItems>
+                              
+                       
+                              <fb:FilterGroupItem groupName="__$INTERNAL$" name="Status" label="{i18n>salesgroup}" visibleInFilterBar="true" class="searchFieldLabelHidden">
+                                <fb:control>
+                                    <ComboBox placeholder="{i18n>Enter} {i18n>Status}" selectedKey="{oModelControl>/filterBar/ReassignmentStatus}">
+                                        <core:Item text="Accepted" key="Accepted"/>
+                                        <core:Item text="Rejected" key="Rejected"/>
+                                        <core:Item text="Pending" key="Pending"/>
+                                    </ComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                              
+                               
+                        </fb:filterGroupItems>
+                    </fb:FilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+              <core:Fragment fragmentName="com.knpl.tsi.usermanagement.usermanage.view.fragments.usermanage" type="XML"/>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

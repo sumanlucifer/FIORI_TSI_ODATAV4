@@ -32,12 +32,59 @@ modules:
         existing_destinations_policy: ignore
   build-parameters:
     no-source: true
+- name: knpl-tsi-web-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: knpl-tsi-web_html_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - comknpltsiusermanagementusermanage.zip
+      name: comknpltsiusermanagementusermanage
+      target-path: resources/
+    - artifacts:
+      - comknpltsiusermanagement.zip
+      name: comknpltsiusermanagement
+      target-path: resources/
+- name: comknpltsiusermanagementusermanage
+  type: html5
+  path: usermanage
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: comknpltsiusermanagement
+  type: html5
+  path: usermanagement
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
 resources:
 - name: knpl-tsi-web-destination-service
   type: org.cloudfoundry.managed-service
   parameters:
     config:
       HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
       version: 1.0.0
     service: destination
     service-name: knpl-tsi-web-destination-service
@@ -55,3 +102,5 @@ resources:
     service: xsuaa
     service-name: knpl-tsi-web-xsuaa-service
     service-plan: application
+parameters:
+  deploy_mode: html5-repo
