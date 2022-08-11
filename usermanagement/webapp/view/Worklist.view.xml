@@ -16,7 +16,7 @@ xmlns:vm="sap.ui.comp.variants" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar
 <fb:filterGroupItems>
 <fb:FilterGroupItem groupName="__$INTERNAL$" name="group" label="{i18n>salesgroup}" visibleInFilterBar="true" class="searchFieldLabelHidden">
                                  <fb:control>
-                                    <Input value="{path:'oSearchControl>/filterBar/salesGroup',formatter:'.formatter.fmtListProductName'}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="oProdValueHelpRequest"/>
+                                    <Input value="{path:'objectModel>/filterBar/salesGroup'}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="oProdValueHelpRequest"/>
                                 </fb:control>
 
                                 <!-- <fb:control>
@@ -27,7 +27,7 @@ xmlns:vm="sap.ui.comp.variants" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar
                             </fb:FilterGroupItem>
                             <fb:FilterGroupItem groupName="__$INTERNAL$" name="Status" label="{i18n>appstatus}" visibleInFilterBar="true" class="searchFieldLabelHidden">
                                 <fb:control>
-                                    <ComboBox selectedKey="{oSearchControl>/filterBar/ApprovalStatus}" placeholder="{i18n>Enter} {i18n>appstatus}">
+                                    <ComboBox selectedKey="{objectModel>/filterBar/ApprovalStatus}" placeholder="{i18n>Enter} {i18n>appstatus}">
                                         <core:Item text="Not Installed" key="Not Installed"/>
                                           <core:Item text="Installed" key="Installed"/>
                                     </ComboBox>

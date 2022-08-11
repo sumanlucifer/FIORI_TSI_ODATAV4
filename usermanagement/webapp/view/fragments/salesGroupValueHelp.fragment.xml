@@ -12,7 +12,7 @@
 		</subHeader>
           	<List
 			id="idList"
-			items="{/getSalesGroupList()}"
+			items="{/getSalesGroupList(searchText='')}"
 			selectionChange=".onSalesGrpSelectionChange"
 			mode="MultiSelect"
 			growing="true"
