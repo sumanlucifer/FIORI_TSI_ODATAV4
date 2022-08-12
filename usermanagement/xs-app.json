@@ -3,10 +3,10 @@
   "authenticationMethod": "route",
   "routes": [
     {
-      "source": "^/api/(.*)$",
-      "target": "/api/$1",
-      "destination": "KNPL_DGA_API",
-      "authenticationType": "xsuaa",
+      "source": "^/tsiadmin/(.*)$",
+      "target": "/tsiadmin/$1",
+      "destination": "KNPL_TSI_API",
+      "authenticationType": "none",
       "csrfProtection": false
     },
     {
