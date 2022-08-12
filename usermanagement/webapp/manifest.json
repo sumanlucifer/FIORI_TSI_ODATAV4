@@ -15,6 +15,21 @@
             "version": "1.6.7",
             "toolsId": "1c3a6632-a705-421b-a1c6-06ffdb566edf"
         },
+        "crossNavigation": {
+            "inbounds": {
+                "intent1": {
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    },
+                    "semanticObject": "UserManagement",
+                    "action": "Manage",
+                    "title": "{{appTitle}}",
+                    "subTitle": "",
+                    "icon": "sap-icon://user-settings"
+                }
+            }
+        },
         "dataSources": {
             "mainService": {
                 "uri": "/tsiadmin/",
@@ -22,7 +37,7 @@
                 "settings": {
                     "annotations": [],
                     "localUri": "localService/metadata.xml",
-                    "odataVersion":"4.0"
+                    "odataVersion": "4.0"
                 }
             }
         }
@@ -77,7 +92,7 @@
                     "operationMode": "Server",
                     "autoExpandSelect": true,
                     "earlyRequests": true
-}
+                }
             }
         },
         "resources": {
@@ -104,7 +119,6 @@
                     "target": [
                         "worklist"
                     ]
-
                 }
             ],
             "targets": {
