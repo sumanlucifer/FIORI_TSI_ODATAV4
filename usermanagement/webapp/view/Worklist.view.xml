@@ -16,7 +16,15 @@ xmlns:vm="sap.ui.comp.variants" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar
 <fb:filterGroupItems>
 <fb:FilterGroupItem groupName="__$INTERNAL$" name="group" label="{i18n>salesgroup}" visibleInFilterBar="true" class="searchFieldLabelHidden">
                                  <fb:control>
-                                    <Input value="{path:'objectModel>/filterBar/salesGroup'}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="oProdValueHelpRequest"/>
+                                 <MultiInput
+				id="idsalesGroupMINP"
+              value="{path:'objectModel>/filterBar/salesGroup'}"
+				tokenDelete="handlesalesGroupTockenDelete"				
+				valueHelpTrigger="handleValueHelpTrigger"
+                showValueHelp="true" valueHelpOnly="true" valueHelpRequest="oProdValueHelpRequest">
+				
+			</MultiInput>
+                                    <!-- <Input value="{path:'objectModel>/filterBar/salesGroup'}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="oProdValueHelpRequest"/> -->
                                 </fb:control>
 
                                 <!-- <fb:control>

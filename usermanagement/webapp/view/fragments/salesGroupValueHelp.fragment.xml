@@ -7,7 +7,7 @@
 	  <Dialog id="idP" showHeader="false"  >
       <subHeader>
 			<OverflowToolbar>
-				<SearchField liveChange=".onSearchSalesGroup" width="100%" />
+				<SearchField value="{path:'objectModel>/filterBar/salesGroupSearchVal'}" search=".onSearchSalesGroup" width="100%" />
 			</OverflowToolbar>
 		</subHeader>
           	<List
@@ -16,7 +16,7 @@
 			selectionChange=".onSalesGrpSelectionChange"
 			mode="MultiSelect"
 			growing="true"
-			growingThreshold="5"
+			growingThreshold="20"
 			includeItemInSelection="true">
 				<headerToolbar>
 			<OverflowToolbar>
@@ -32,6 +32,10 @@
 				iconDensityAware="false"
 				iconInset="false" />
 		</List>
+
+        <endButton>
+            <Button text="Close" press="onSalesGroupDialogClose"/>
+        </endButton>
     </Dialog>
   
 
