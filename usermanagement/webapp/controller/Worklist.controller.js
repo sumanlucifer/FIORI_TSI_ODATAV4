@@ -12,7 +12,6 @@ sap.ui.define(
         "sap/m/MessageToast",
         "sap/ui/core/util/Export",
         "sap/ui/core/util/ExportTypeCSV"
-
     ],
     function (
         BaseController,
@@ -27,7 +26,6 @@ sap.ui.define(
         MessageToast,
         Export,
         ExportTypeCSV
-
     ) {
         "use strict";
         return BaseController.extend(
@@ -45,7 +43,6 @@ sap.ui.define(
                 var oDataControl = {
                     filterBar: {
                         Search: ""
-
                     },
                     PageBusy: false
                 };
@@ -67,7 +64,7 @@ sap.ui.define(
                 this.byId("idsalesGroupMINP").setTokens([]);
             },
             _onRouteMatched: function () {
-                this.getUserList(20, 0);
+                this.getUserList(null,null);
                 this._InitData();
             },
             onPressAddObject: function () {
@@ -95,7 +92,6 @@ sap.ui.define(
                 var c1, c2, c3, c4;
                 // oModelControl.setProperty("/PageBusy", true)
                 c1 = othat._addSearchFieldAssociationToFB();
-
             },
             _addSearchFieldAssociationToFB: function () {
                 /*
@@ -121,19 +117,17 @@ sap.ui.define(
                 promise.resolve();
                 return promise;
             },
-
             getUserList: function (nTopRec, nskipRec, sSearch, aSalesgrp, appstaus, ssort, sortcolumn) {
                 var oModel = this.getOwnerComponent().getModel();
                 this.getView().getModel("objectModel").setProperty("/PageBusy", true);
                 var oActionODataContextBinding = oModel.bindContext("/getTSIUserList(...)");
-                oActionODataContextBinding.setParameter("topRec", nTopRec ? nTopRec : 20);
-                oActionODataContextBinding.setParameter("skipRec", nskipRec ? nskipRec : 0);
+                oActionODataContextBinding.setParameter("topRec", nTopRec ? nTopRec : null);
+                oActionODataContextBinding.setParameter("skipRec", nskipRec ? nskipRec : null);
                 oActionODataContextBinding.setParameter("searchText", sSearch ? sSearch : "");
                 oActionODataContextBinding.setParameter("salesGroup", aSalesgrp ? aSalesgrp : []);
                 oActionODataContextBinding.setParameter("appStatus", appstaus ? appstaus : null);
                 oActionODataContextBinding.setParameter("sortOrder", ssort ? ssort : "DESC");
                 oActionODataContextBinding.setParameter("sortColumn", sortcolumn ? sortcolumn : "FIRST_NAME");
-
                 oActionODataContextBinding.execute().then(
                     function () {
                         this.getView().getModel("objectModel").setProperty("/PageBusy", false);
@@ -142,22 +136,21 @@ sap.ui.define(
                         this.getView().getModel("objectModel").setProperty("/total", nTotalCount);
                         this.getView().getModel("oModelControl").setData(aNewUsers);
                         var aExistingUsers = this.getView().getModel("oModelControl").getData();
-
-                        if (aNewUsers.length > 0) {
-                            this.getView().getModel("oModelControl").setData([...aNewUsers, ...aExistingUsers]);
-                        }
-
+                        // if (aNewUsers.length > 0) {
+                        //     this.getView().getModel("oModelControl").setData([...aNewUsers, ...aExistingUsers]);
+                        // }
                     }.bind(this)
                 );
             },
+            onUpdateFinish:function(oevent){
+                debugger;
+            },
             onSearch: function (oevent) {
-
                 var sSearchText = this.getView().getModel("objectModel").getProperty("/filterBar/Search");
                 var aSaleGrp = this.fnGetSalesGroupsTokens();
                 var sApprvlStatus = this.getView().getModel("objectModel").getProperty("/filterBar/ApprovalStatus");
                 this.getUserList(null, null, sSearchText, aSaleGrp, sApprvlStatus, "DESC", "FIRST_NAME");
             },
-
             fnGetSalesGroupsTokens: function () {
                 var aTokens = this.byId("idsalesGroupMINP").getTokens(),
                     aTokenIDs = [];
@@ -203,7 +196,7 @@ sap.ui.define(
                     }, {
                         name: "App Version",
                         template: {
-                            content: "{= ${APP_VERSION} !== null ? ${APP_VERSION} : '---'}"
+                            content: "{= ${APP_VERSION} !== null ? ${APP_VERSION} : '--'}"
                         }
                     },
                     {
@@ -215,7 +208,7 @@ sap.ui.define(
                     {
                         name: "Login Date & Time",
                         template: {
-                            content: "{= ${LAST_LOGIN_AT} !== null ? ${LAST_LOGIN_AT} : '---'}"
+                            content: "{= ${LAST_LOGIN_AT} !== null ? ${LAST_LOGIN_AT} : '--'}"
                         }
                     },
                     {
@@ -231,7 +224,6 @@ sap.ui.define(
                     oExport.destroy();
                 });
             },
-
             onLoadMoreData: function () {
                 // this.getUserList(20, 0);
             },
@@ -246,6 +238,10 @@ sap.ui.define(
                     }).then(function (oDialog) {
                         this._oDialog = oDialog;
                         oView.addDependent(this._oDialog);
+                        var oList = oView.byId("idList");
+                        var oSList = oView.byId("idStanList");
+                        var sBindingPath = "/getSalesGroupList(searchText='')";
+                        oList.bindItems(sBindingPath, oSList);
                         this._oDialog.open();
                     }.bind(this))
                 } else {
@@ -256,21 +252,23 @@ sap.ui.define(
                 var oModel = this.getOwnerComponent().getModel();
                 var sSearchSaleGrpVal = this.getView().getModel("objectModel").getProperty("/filterBar/salesGroupSearchVal");
                 this.getView().getModel("objectModel").setProperty("/PageBusy", true);
-                var oActionODataContextBinding = oModel.bindContext("/getSalesGroupList(...)");
-                oActionODataContextBinding.setParameter("searchText", sSearchSaleGrpVal ? sSearchSaleGrpVal : null);
-
-                oActionODataContextBinding.execute().then(
-                    function () {
-                        this.getView().getModel("objectModel").setProperty("/PageBusy", false);
-                        var aSaleGroupResponse = oActionODataContextBinding.getBoundContext().getObject().value;
-
-                    }.bind(this)
-                );
+                var oList = this.getView().byId("idList");
+                var oSList = this.getView().byId("idStanList");
+                var sBindingPath = "/getSalesGroupList(searchText='" + sSearchSaleGrpVal + "')";
+                oList.bindItems(sBindingPath, oSList);
+                this.getView().getModel("objectModel").setProperty("/PageBusy", false);
+                // var oActionODataContextBinding = oModel.bindContext("/getSalesGroupList(...)");
+                // oActionODataContextBinding.setParameter("searchText", sSearchSaleGrpVal ? sSearchSaleGrpVal : null);
+                // oActionODataContextBinding.execute().then(
+                //     function () {
+                //         this.getView().getModel("objectModel").setProperty("/PageBusy", false);
+                //         var aSaleGroupResponse = oActionODataContextBinding.getBoundContext().getObject().value;
+                //     }.bind(this)
+                // );
             },
-
             onResetFilterBar: function () {
                 this._ResetFilterBar();
-                this.getUserList(20, 0);
+                this.getUserList(null,null);
             },
             onPressApproveReject: function (oEve) {
                 var sEmail = oEve.getSource().getBindingContext("oModelControl").getObject().EMAIL;
@@ -278,7 +276,6 @@ sap.ui.define(
                 var sStatus = sActivated === 0 ? 1 : 0,
                     sMessage = sActivated === 1 ? "Deactivate" : "Activate",
                     sAccptRejctCheck = sActivated === "Deactivated" ? this._showMessageBox("information", "MsgConfirm", [sMessage], this.onApproveRejectServiceCall.bind(this, sEmail, sStatus, "Approved")) : this._showMessageBox("information", "MsgConfirm", [sMessage], this.onApproveRejectServiceCall.bind(this, sEmail, sStatus, "Approved"));
-
             },
             onApproveRejectServiceCall: function (sEmail, sStatus) {
                 var oModel = this.getOwnerComponent().getModel();
@@ -292,18 +289,15 @@ sap.ui.define(
                         this.getView().getModel("objectModel").setProperty("/PageBusy", false);
                         var oResponseTxt = oActionODataContextBinding.getBoundContext().getObject();
                         MessageToast.show(oResponseTxt.value);
-
-
                     }.bind(this)
                 );
-
             },
-        onSalesGroupDialogClose: function () {
-        var aSelectedSalesGroupItems = this.byId("idList").getSelectedItems(),
-         aTockes = [];
-        for (var i = 0; i < aSelectedSalesGroupItems.length; i++) {
-         var sSALES_GRP = aSelectedSalesGroupItems[i].getBindingContext().getObject().SALES_GRP;
-        aTockes.push(new sap.m.Token({ text: sSALES_GRP }));
+            onSalesGroupDialogClose: function () {
+                var aSelectedSalesGroupItems = this.byId("idList").getSelectedItems(),
+                    aTockes = [];
+                for (var i = 0; i < aSelectedSalesGroupItems.length; i++) {
+                    var sSALES_GRP = aSelectedSalesGroupItems[i].getBindingContext().getObject().SALES_GRP;
+                    aTockes.push(new sap.m.Token({ text: sSALES_GRP }));
                 }
                 this.byId("idsalesGroupMINP").setTokens(aTockes);
                 this.byId("idList").removeSelections();

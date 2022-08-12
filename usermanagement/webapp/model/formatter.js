@@ -70,13 +70,13 @@ sap.ui.define([], function () {
         getDateTime:function(mParam){
             if(!mParam)
             {
-                return "---";
+                return "--";
             }
-     var date = mParam.split(".")[0],
-     sdate = date.split(" ");
-     var  sMeridian =  date.split(" ")[1].split(":")[0]  >= 12 ? "PM":"AM";
-     date = `${sdate[0]}, ${sdate[1]} ${sMeridian}`
-     return date;
+    //  var date = mParam.split(".")[0],
+    //  sdate = date.split(" ");
+    //  var  sMeridian =  date.split(" ")[1].split(":")[0]  >= 12 ? "PM":"AM";
+    //  date = `${sdate[0]}, ${sdate[1]} ${sMeridian}`
+     return mParam;
         }
     };
 

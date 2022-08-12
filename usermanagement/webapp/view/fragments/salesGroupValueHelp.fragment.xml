@@ -1,42 +1,41 @@
 <core:FragmentDefinition
-    xmlns="sap.m"
-    xmlns:l="sap.ui.layout"
-    xmlns:f="sap.ui.layout.form"
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
 	xmlns:core="sap.ui.core"
-    	xmlns:u="sap.ui.unified">
-	  <Dialog id="idP" showHeader="false"  >
-      <subHeader>
+	xmlns:u="sap.ui.unified">
+	<Dialog id="idP" showHeader="false"  >
+		<subHeader>
 			<OverflowToolbar>
 				<SearchField value="{path:'objectModel>/filterBar/salesGroupSearchVal'}" search=".onSearchSalesGroup" width="100%" />
 			</OverflowToolbar>
 		</subHeader>
-          	<List
+		<List
 			id="idList"
-			items="{/getSalesGroupList(searchText='')}"
+		
+          
 			selectionChange=".onSalesGrpSelectionChange"
 			mode="MultiSelect"
 			growing="true"
 			growingThreshold="20"
 			includeItemInSelection="true">
-				<headerToolbar>
-			<OverflowToolbar>
-				<content>
-					<Title text="Select Sales Group" level="H2" />
-					<ToolbarSpacer />
-				
-				</content>
-			</OverflowToolbar>
-		</headerToolbar>
-			<StandardListItem
+			<headerToolbar>
+				<OverflowToolbar>
+					<content>
+						<Title text="Select Sales Group" level="H2" />
+						<ToolbarSpacer />
+					</content>
+				</OverflowToolbar>
+			</headerToolbar>
+			<dependents>
+				<StandardListItem id="idStanList"
 				title="{SALES_GRP}"
 				iconDensityAware="false"
 				iconInset="false" />
+			</dependents>
 		</List>
-
-        <endButton>
-            <Button text="Close" press="onSalesGroupDialogClose"/>
-        </endButton>
-    </Dialog>
-  
-
+		<endButton>
+			<Button text="Close" press="onSalesGroupDialogClose"/>
+		</endButton>
+	</Dialog>
 </core:FragmentDefinition>

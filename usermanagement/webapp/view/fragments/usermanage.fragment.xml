@@ -1,19 +1,15 @@
-<core:FragmentDefinition xmlns="sap.m"
+<core:FragmentDefinition 
+    xmlns="sap.m"
    	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:core="sap.ui.core">
-    <ScrollContainer vertical="true">
-
-
-  <Table id="idUserTable" sticky="HeaderToolbar,InfoToolbar,ColumnHeaders" items="{path: 'oModelControl>/'}" inset="false">
-		<headerToolbar>
+    <Table growing="true" updateStarted="onUpdateFinish" growingThreshold="20" id="idUserTable" sticky="HeaderToolbar,InfoToolbar,ColumnHeaders" items="{path: 'oModelControl>/'}" inset="false">
+	    <headerToolbar>
 			<OverflowToolbar>
 				<content>
 					<Title text="List of TSI ({objectModel>/total})" level="H2"/>
-                    <!-- <Title text="{= ${oModelControl>/}.length}"  level="H2"/> -->
 					<ToolbarSpacer />                     
-                      <Button text="{i18n>Download}" icon="sap-icon://download" press="onDataExport"/>
-                        <Button icon="sap-icon://sort" press="onSort"/>
-				  
+                    <Button text="{i18n>Download}" type="Emphasized" icon="sap-icon://download" press="onDataExport"/>
+                    <Button icon="sap-icon://sort" press="onSort"/>
                 </content>
 			</OverflowToolbar>
 		</headerToolbar>
@@ -47,29 +43,22 @@
 			</Column>
 		</columns>
 		<items>
-			 <ColumnListItem press="onListItemPress">
-                    <cells>
-                         <Text text="{oModelControl>FIRST_NAME}"/>
-                           <Text text="{oModelControl>LAST_NAME}"/>
-                            <Text  text="{oModelControl>EMAIL}"/>
-                          <Text class="sapUiSmallMarginBegin" text="{oModelControl>SALES_GROUP}"/>
-                            <Text class="sapUiSmallMarginBegin" text="{= ${oModelControl>APP_VERSION} !== null ? ${oModelControl>APP_VERSION} : '---'}" />
-                            <Text text="{oModelControl>APP_STATUS}"/>
-                          <Text text="{path:'oModelControl>LAST_LOGIN_AT',formatter:'.formatter.getDateTime'}"/>
-                           <ObjectStatus text="{oModelControl>STATUS}" state="{= ${oModelControl>IS_ACTIVATED} === 1  ? 'Success' : 'Error' }"/> 
-                       
-                         <HBox>
-                        
-                        <Button  text="{i18n>Deactivate}"  visible="{= ${oModelControl>IS_ACTIVATED} === 1  ? true : false}" press="onPressApproveReject" type="Reject" tooltip="{i18n>Deactivate}"/>
-						<Button  text="{i18n>Activate}" visible="{= ${oModelControl>IS_ACTIVATED} === 1  ? false : true}"   press="onPressApproveReject" type="Accept" tooltip="{i18n>Activate}"/>
-                     </HBox>
-                    </cells>
-                </ColumnListItem>
-           </items>
+			<ColumnListItem press="onListItemPress">
+                <cells>
+                    <Text text="{oModelControl>FIRST_NAME}"/>
+                    <Text text="{oModelControl>LAST_NAME}"/>
+                    <Text text="{oModelControl>EMAIL}"/>
+                    <Text class="sapUiSmallMarginBegin" text="{oModelControl>SALES_GROUP}"/>
+                    <Text class="sapUiSmallMarginBegin" text="{= ${oModelControl>APP_VERSION} !== null ? ${oModelControl>APP_VERSION} : '--'}" />
+                    <Text text="{oModelControl>APP_STATUS}"/>
+                    <Text text="{path:'oModelControl>LAST_LOGIN_AT',formatter:'.formatter.getDateTime'}"/>
+                    <ObjectStatus text="{oModelControl>STATUS}" state="{= ${oModelControl>IS_ACTIVATED} === 1  ? 'Success' : 'Error' }"/> 
+                    <HBox>
+                        <Button text="{i18n>Deactivate}"  visible="{= ${oModelControl>IS_ACTIVATED} === 1  ? true : false}" press="onPressApproveReject" type="Reject" tooltip="{i18n>Deactivate}"/>
+                        <Button text="{i18n>Activate}" visible="{= ${oModelControl>IS_ACTIVATED} === 1  ? false : true}"   press="onPressApproveReject" type="Accept" tooltip="{i18n>Activate}"/>
+                    </HBox>
+                </cells>
+            </ColumnListItem>
+        </items>
 	</Table>
-<OverflowToolbar width="100%" class="sapUiNoMargin">
-<Button id="idLoadMoreBtn" text="More [ {objectModel>/currentTotal} / {objectModel>/total} ]" press="onLoadMoreData" width="100%" />
-</OverflowToolbar>
-</ScrollContainer>
-
 </core:FragmentDefinition>
