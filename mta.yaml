@@ -43,23 +43,9 @@ modules:
     build-result: resources
     requires:
     - artifacts:
-      - comknpltsiusermanagementusermanage.zip
-      name: comknpltsiusermanagementusermanage
-      target-path: resources/
-    - artifacts:
       - comknpltsiusermanagement.zip
       name: comknpltsiusermanagement
       target-path: resources/
-- name: comknpltsiusermanagementusermanage
-  type: html5
-  path: usermanage
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm install
-    - npm run build:cf
-    supported-platforms: []
 - name: comknpltsiusermanagement
   type: html5
   path: usermanagement
