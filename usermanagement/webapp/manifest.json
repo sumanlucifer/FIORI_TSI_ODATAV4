@@ -26,13 +26,7 @@
                     "action": "Manage",
                     "title": "{{appTitle}}",
                     "subTitle": "",
-                    "icon": "sap-icon://user-settings",
-                    "indicatorDataSource": {
-                        "dataSource": "KNPL_TSI_API",
-                        "path": "/dynamic_dest/KNPL_TSI_API/tsiadmin/getTSIUsersCount()",
-                        "refresh": 0
-                    }
-
+                    "icon": "sap-icon://user-settings"
                 }
             }
         },
