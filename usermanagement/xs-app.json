@@ -6,7 +6,7 @@
       "source": "^/tsiadmin/(.*)$",
       "target": "/tsiadmin/$1",
       "destination": "KNPL_TSI_API",
-      "authenticationType": "none",
+      "authenticationType": "xsuaa",
       "csrfProtection": false
     },
     {
