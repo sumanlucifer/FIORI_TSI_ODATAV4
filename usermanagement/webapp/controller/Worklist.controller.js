@@ -191,7 +191,7 @@ sap.ui.define(
                     }, {
                         name: "Sales Group",
                         template: {
-                            content: "{SALES_GROUP}"
+                            content: "{= ${SALES_GROUP}.join(',') }"
                         }
                     }, {
                         name: "App Version",
