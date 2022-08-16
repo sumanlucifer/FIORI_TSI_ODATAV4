@@ -29,7 +29,7 @@
                     "icon": "sap-icon://user-settings",
                     "indicatorDataSource": {
                         "dataSource": "KNPL_TSI_API",
-                        "path": "/dynamic_dest/KNPL_DGA_API/tsiadmin/getTSIUsersCount()",
+                        "path": "/dynamic_dest/KNPL_TSI_API/tsiadmin/getTSIUsersCount()",
                         "refresh": 0
                     }
 
