@@ -300,6 +300,8 @@ sap.ui.define(
                 oActionODataContextBinding.setParameter("isActivated", sStatus);
                 oActionODataContextBinding.execute().then(
                     function () {
+                        var sApprvlStatus = this.getView().getModel("objectModel").getProperty("/filterBar/ApprovalStatus") ? this.getView().getModel("objectModel").getProperty("/filterBar/ApprovalStatus"): null;
+                        this.getUserList(null, null, null, null, sApprvlStatus, null, null);
                         this.getUserList();
                         this.getView().getModel("objectModel").setProperty("/PageBusy", false);
                         var oResponseTxt = oActionODataContextBinding.getBoundContext().getObject();
