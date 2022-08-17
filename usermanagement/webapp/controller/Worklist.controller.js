@@ -64,7 +64,7 @@ sap.ui.define(
                 this.byId("idsalesGroupMINP").setTokens([]);
             },
             _onRouteMatched: function () {
-                this.getUserList(null,null);
+                this.getUserList(null, null);
                 this._InitData();
             },
             onPressAddObject: function () {
@@ -142,8 +142,7 @@ sap.ui.define(
                     }.bind(this)
                 );
             },
-            onUpdateFinish:function(oevent){
-                debugger;
+            onUpdateFinish: function (oevent) {
             },
             onSearch: function (oevent) {
                 var sSearchText = this.getView().getModel("objectModel").getProperty("/filterBar/Search");
@@ -159,8 +158,24 @@ sap.ui.define(
                 }
                 return aTokenIDs;
             },
+            // onSort: function () {
+            //     this.getUserList(null, null, null, null, null, "ASC", "FIRST_NAME");
+            // },
             onSort: function () {
-                this.getUserList(null, null, null, null, null, "ASC", "FIRST_NAME");
+                if (!this._oSortDialog) {
+                    this._oSortDialog = sap.ui.xmlfragment("com.knpl.tsi.usermanagement.view.fragments.SortDialog", this);
+                    this.getView().addDependent(this._oSortDialog);
+                }
+                if (Device.system.desktop) {
+                    this._oSortDialog.addStyleClass("sapUiSizeCompact");
+                }
+                this._oSortDialog.open();
+            },
+            handleSortDialogConfirm: function (oEvent) {
+                var sSortValue = oEvent.getParameters().sortItem ? oEvent.getParameters().sortItem.getKey() : null,
+                    bSortColumn = oEvent.getParameters().sortDescending,
+                    bSortColumn = bSortColumn ? "DESC" : "ASC";
+                this.getUserList(null, null, null, null, null, bSortColumn, sSortValue);
             },
             onDataExport: sap.m.Table.prototype.exportData || function () {
                 var oModel = this.getView().getModel("oModelControl");
@@ -268,7 +283,7 @@ sap.ui.define(
             },
             onResetFilterBar: function () {
                 this._ResetFilterBar();
-                this.getUserList(null,null);
+                this.getUserList(null, null);
             },
             onPressApproveReject: function (oEve) {
                 var sEmail = oEve.getSource().getBindingContext("oModelControl").getObject().EMAIL;
@@ -303,6 +318,5 @@ sap.ui.define(
                 this.byId("idList").removeSelections();
                 this._oDialog.close();
             }
-
         });
     });
