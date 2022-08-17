@@ -300,8 +300,9 @@ sap.ui.define(
                 oActionODataContextBinding.setParameter("isActivated", sStatus);
                 oActionODataContextBinding.execute().then(
                     function () {
+                        var aSaleGrp = this.fnGetSalesGroupsTokens();
                         var sApprvlStatus = this.getView().getModel("objectModel").getProperty("/filterBar/ApprovalStatus") ? this.getView().getModel("objectModel").getProperty("/filterBar/ApprovalStatus"): null;
-                        this.getUserList(null, null, null, null, sApprvlStatus, null, null);
+                        this.getUserList(null, null, null, aSaleGrp, sApprvlStatus, null, null);
                         this.getView().getModel("objectModel").setProperty("/PageBusy", false);
                         var oResponseTxt = oActionODataContextBinding.getBoundContext().getObject();
                         MessageToast.show(oResponseTxt.value);
