@@ -4,6 +4,9 @@
       <ViewSettingsItem selected="true" text="First Name" key="FIRST_NAME"/>
       <ViewSettingsItem text="Last Name" key="LAST_NAME"/>
       <ViewSettingsItem text="Email" key="EMAIL"/>
+        <ViewSettingsItem text="App Version" key="APP_VERSION"/>
+      <ViewSettingsItem text="Login Date Time" key="LAST_LOGIN_AT"/>
+      <ViewSettingsItem text="Sales Group" key="SALES_GROUP"/>
     </sortItems>
   </ViewSettingsDialog>
 </core:FragmentDefinition>
