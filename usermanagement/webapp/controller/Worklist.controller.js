@@ -192,7 +192,7 @@ sap.ui.define(
                 var oExport = new Export({
                     exportType: new ExportTypeCSV({
                         fileExtension: "csv",
-                        separatorChar: ","
+                        separatorChar: ";"
                     }),
                     models: oModel,
                     rows: {
@@ -216,7 +216,7 @@ sap.ui.define(
                     }, {
                         name: "Sales Group",
                         template: {
-                            content: "{= ${SALES_GROUP}.join(';') }"
+                            content: "{= ${SALES_GROUP}.join(',') }"
                         }
                     }, {
                         name: "App Version",
@@ -320,13 +320,14 @@ sap.ui.define(
                 );
             },
             onSalesGrpSelectionChange: function (oEvent) {
-                var aSelectedLineItems = oEvent.getParameter("selected");
-                this.byId("idList").getSelectedItems();
-                aSelKeys = [];
-                for (var i = 0; i < aSelectedLineItems.length; i++) {
-                    this.aSelKeys.push(aSelectedLineItems[i].getBindingContext().getObject());
-                }
-            },
+               
+                var aSelectedLineItems= this.byId("idList").getSelectedItems(),
+                  aSelKeys = [];
+                  for (var i = 0; i < aSelectedLineItems.length; i++) {
+                      aSelKeys.push(aSelectedLineItems[i].getBindingContext().getObject());
+                  }
+                  this.getView().getModel("objectModel").setProperty("/filterBar/salesGroup'", aSelKeys);
+              },
             onSalesGroupDialogClose: function () {
                 var aSelectedSalesGroupItems = this.byId("idList").getSelectedItems(),
                     aTockes = [];
