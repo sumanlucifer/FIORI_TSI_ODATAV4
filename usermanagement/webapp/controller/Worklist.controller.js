@@ -175,12 +175,12 @@ sap.ui.define(
             onSalesGrpSelectionChange: function (oEvent) {
                
                 var aSelectedLineItems=  oEvent.getSource().getSelectedItems(),
-                this.aSelKeys = [];
+                aSelectedKeys = [];
                 for (var i = 0; i < aSelectedLineItems.length; i++) {
-                      this.aSelKeys.push( new sap.m.Token({ text: aSelectedLineItems[i].getBindingContext().getObject().SALES_GRP }));
+                    aSelectedKeys.push( new sap.m.Token({ text: aSelectedLineItems[i].getBindingContext().getObject().SALES_GRP }));
                      
                   }
-                  this.getView().getModel("objectModel").setProperty("/filterBar/salesGroup'", this.aSelKeys);
+                  this.getView().getModel("objectModel").setProperty("/filterBar/salesGroup'", aSelectedKeys);
               },
             handleSortDialogConfirm: function (oEvent) {
                 var sSortValue = oEvent.getParameters().sortItem ? oEvent.getParameters().sortItem.getKey() : null,
