@@ -279,7 +279,7 @@ sap.ui.define(
                 }
             },
             onSearchSalesGroup: function () {
-                var oModel = this.getOwnerComponent().getModel();
+               
                 var sSearchSaleGrpVal = this.getView().getModel("objectModel").getProperty("/filterBar/salesGroupSearchVal");
                 this.getView().getModel("objectModel").setProperty("/PageBusy", true);
                 var oList = this.getView().byId("idList");
@@ -287,14 +287,7 @@ sap.ui.define(
                 var sBindingPath = "/getSalesGroupList(searchText='" + sSearchSaleGrpVal + "')";
                 oList.bindItems(sBindingPath, oSList);
                 this.getView().getModel("objectModel").setProperty("/PageBusy", false);
-                // var oActionODataContextBinding = oModel.bindContext("/getSalesGroupList(...)");
-                // oActionODataContextBinding.setParameter("searchText", sSearchSaleGrpVal ? sSearchSaleGrpVal : null);
-                // oActionODataContextBinding.execute().then(
-                //     function () {
-                //         this.getView().getModel("objectModel").setProperty("/PageBusy", false);
-                //         var aSaleGroupResponse = oActionODataContextBinding.getBoundContext().getObject().value;
-                //     }.bind(this)
-                // );
+               
             },
             onResetFilterBar: function () {
                 this._ResetFilterBar();
@@ -325,14 +318,14 @@ sap.ui.define(
                 );
             },
             onSalesGroupDialogClose: function () {
-                var aSelectedSalesGroupItems = this.byId("idList").getSelectedItems(),
-                    aTockes = [];
-                for (var i = 0; i < aSelectedSalesGroupItems.length; i++) {
-                    var sSALES_GRP = aSelectedSalesGroupItems[i].getBindingContext().getObject().SALES_GRP;
-                    aTockes.push(new sap.m.Token({ text: sSALES_GRP }));
-                }
-                this.byId("idsalesGroupMINP").setTokens(aTockes);
-                this.byId("idList").removeSelections();
+                // var aSelectedSalesGroupItems = this.byId("idList").getSelectedItems(),
+                //     aTockes = [];
+                // for (var i = 0; i < aSelectedSalesGroupItems.length; i++) {
+                //     var sSALES_GRP = aSelectedSalesGroupItems[i].getBindingContext().getObject().SALES_GRP;
+                //     aTockes.push(new sap.m.Token({ text: sSALES_GRP }));
+                // }
+                // this.byId("idsalesGroupMINP").setTokens(aTockes);
+                // this.byId("idList").removeSelections();
                 this._oDialog.close();
             },
         });
