@@ -184,7 +184,7 @@ sap.ui.define(
                         }; 
                     });
 
-                    var aUpdatedItems = aExistingItems ?  [...aExistingItems, ...aSelectedKeys] : [aSelectedKeys] ;
+                    var aUpdatedItems = aExistingItems ?  [...aExistingItems, ...aSelectedKeys] : aSelectedKeys;
                 
                 this.getView().getModel("objectModel").setProperty("/filterBar/salesGroup", aUpdatedItems);
             },
