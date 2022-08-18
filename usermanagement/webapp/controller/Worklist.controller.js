@@ -175,8 +175,8 @@ sap.ui.define(
             onSalesGrpSelectionChange: function (oEvent) {
 
                 var aExistingItems =  this.getView().getModel("objectModel").getProperty("/filterBar/salesGroup");
-                var aSelectedLineItems = oEvent.getSource().getSelectedItems(),
-                    aSelectedKeys = [];
+                var aSelectedLineItems = oEvent.getSource().getSelectedItems();
+               var aSelectedKeys = [];
                     aSelectedKeys = aSelectedLineItems.map(function(items){
                         return {
                             text: items.getBindingContext().getObject().SALES_GRP
