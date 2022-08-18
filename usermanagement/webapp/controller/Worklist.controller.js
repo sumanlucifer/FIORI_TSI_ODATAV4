@@ -149,7 +149,7 @@ sap.ui.define(
                 var sSearchText = this.getView().getModel("objectModel").getProperty("/filterBar/Search");
                 var aSaleGrp = this.fnGetSalesGroupsTokens();
                 var sApprvlStatus = this.getView().getModel("objectModel").getProperty("/filterBar/ApprovalStatus");
-                this.getUserList(null, null, sSearchText, aSaleGrp, sApprvlStatus, "DESC", "FIRST_NAME");
+                this.getUserList(null, null, sSearchText, aSaleGrp, sApprvlStatus, null, "FIRST_NAME");
             },
             fnGetSalesGroupsTokens: function () {
                 var aTokens = this.byId("idsalesGroupMINP").getTokens(),
@@ -173,15 +173,13 @@ sap.ui.define(
                 this._oSortDialog.open();
             },
             onSalesGrpSelectionChange: function (oEvent) {
-               
-                var aSelectedLineItems=  oEvent.getSource().getSelectedItems(),
-                aSelectedKeys = [];
+                var aSelectedLineItems = oEvent.getSource().getSelectedItems(),
+                    aSelectedKeys = [];
                 for (var i = 0; i < aSelectedLineItems.length; i++) {
-                    aSelectedKeys.push( new sap.m.Token({ text: aSelectedLineItems[i].getBindingContext().getObject().SALES_GRP }));
-                     
-                  }
-                  this.getView().getModel("objectModel").setProperty("/filterBar/salesGroup'", aSelectedKeys);
-              },
+                    aSelectedKeys.push(new sap.m.Token({ text: aSelectedLineItems[i].getBindingContext().getObject().SALES_GRP }));
+                }
+                this.getView().getModel("objectModel").setProperty("/filterBar/salesGroup'", aSelectedKeys);
+            },
             handleSortDialogConfirm: function (oEvent) {
                 var sSortValue = oEvent.getParameters().sortItem ? oEvent.getParameters().sortItem.getKey() : null,
                     bSortColumn = oEvent.getParameters().sortDescending,
@@ -320,7 +318,6 @@ sap.ui.define(
                     }.bind(this)
                 );
             },
-          
             onSalesGroupDialogClose: function () {
                 var aSelectedSalesGroupItems = this.byId("idList").getSelectedItems(),
                     aTockes = [];
