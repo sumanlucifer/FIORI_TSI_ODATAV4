@@ -174,7 +174,7 @@ sap.ui.define(
             },
             onSalesGrpSelectionChange: function (oEvent) {
 
-                var aExistingItems =  this.getView().getModel("objectModel").getProperty("/filterBar/salesGroup") ?  this.getView().getModel("objectModel").getProperty("/filterBar/salesGroup") : [];
+                var aExistingItems =  this.getView().getModel("objectModel").getProperty("/filterBar/salesGroup") ?  this.getView().getModel("objectModel").getProperty("/filterBar/salesGroup") : null;
                 var aSelectedLineItems = oEvent.getSource().getSelectedItems();
                var aSelectedKeys = [];
                     aSelectedKeys = aSelectedLineItems.map(function(items){
@@ -184,7 +184,7 @@ sap.ui.define(
                         }; 
                     });
 
-                    var aUpdatedItems = [...aExistingItems, ...aSelectedLineItems];
+                    var aUpdatedItems = aExistingItems ?  [...aExistingItems, ...aSelectedLineItems] : [aSelectedLineItems] ;
                 
                 this.getView().getModel("objectModel").setProperty("/filterBar/salesGroup", aUpdatedItems);
             },
