@@ -17,13 +17,19 @@ xmlns:vm="sap.ui.comp.variants" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar
 <fb:FilterGroupItem groupName="__$INTERNAL$" name="group" label="{i18n>salesgroup}" visibleInFilterBar="true" class="searchFieldLabelHidden">
                                  <fb:control>
                                  <MultiInput
+                                 
 				id="idsalesGroupMINP"
-              value="{path:'objectModel>/filterBar/salesGroup'}"
+            
 				tokenDelete="handlesalesGroupTockenDelete"				
 				valueHelpTrigger="handleValueHelpTrigger"
+                tokens="{path:'objectModel>/filterBar/salesGroup'}"
                 showValueHelp="true" valueHelpOnly="true" valueHelpRequest="oProdValueHelpRequest">
-				
-			</MultiInput>
+				 
+                 <tokens>
+            <Token text="{text}" key="{text}"/>
+        </tokens>
+			
+            </MultiInput>
                                     <!-- <Input value="{path:'objectModel>/filterBar/salesGroup'}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="oProdValueHelpRequest"/> -->
                                 </fb:control>
 
