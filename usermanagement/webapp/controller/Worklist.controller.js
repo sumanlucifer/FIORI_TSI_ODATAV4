@@ -126,7 +126,8 @@ sap.ui.define(
                 oActionODataContextBinding.setParameter("searchText", sSearch ? sSearch : "");
                 oActionODataContextBinding.setParameter("salesGroup", aSalesgrp ? aSalesgrp : []);
                 oActionODataContextBinding.setParameter("appStatus", appstaus ? appstaus : null);
-                oActionODataContextBinding.setParameter("sortOrder", ssort ? ssort : "DESC");
+                oActionODataContextBinding.setParameter("sortOrder", ssort ? ssort : "ASC");
+                // oActionODataContextBinding.setParameter("sortOrder", ssort ? ssort : "DESC");
                 oActionODataContextBinding.setParameter("sortColumn", sortcolumn ? sortcolumn : "FIRST_NAME");
                 oActionODataContextBinding.execute().then(
                     function () {
@@ -301,13 +302,21 @@ sap.ui.define(
                 oActionODataContextBinding.execute().then(
                     function () {
                         var aSaleGrp = this.fnGetSalesGroupsTokens();
-                        var sApprvlStatus = this.getView().getModel("objectModel").getProperty("/filterBar/ApprovalStatus") ? this.getView().getModel("objectModel").getProperty("/filterBar/ApprovalStatus"): null;
+                        var sApprvlStatus = this.getView().getModel("objectModel").getProperty("/filterBar/ApprovalStatus") ? this.getView().getModel("objectModel").getProperty("/filterBar/ApprovalStatus") : null;
                         this.getUserList(null, null, null, aSaleGrp, sApprvlStatus, null, null);
                         this.getView().getModel("objectModel").setProperty("/PageBusy", false);
                         var oResponseTxt = oActionODataContextBinding.getBoundContext().getObject();
                         MessageToast.show(oResponseTxt.value);
                     }.bind(this)
                 );
+            },
+            onSalesGrpSelectionChange: function (oEvent) {
+                var aSelectedLineItems = oEvent.getParameter("selected");
+                this.byId("idList").getSelectedItems();
+                aSelKeys = [];
+                for (var i = 0; i < aSelectedLineItems.length; i++) {
+                    this.aSelKeys.push(aSelectedLineItems[i].getBindingContext().getObject());
+                }
             },
             onSalesGroupDialogClose: function () {
                 var aSelectedSalesGroupItems = this.byId("idList").getSelectedItems(),
@@ -319,6 +328,6 @@ sap.ui.define(
                 this.byId("idsalesGroupMINP").setTokens(aTockes);
                 this.byId("idList").removeSelections();
                 this._oDialog.close();
-            }
+            },
         });
     });
