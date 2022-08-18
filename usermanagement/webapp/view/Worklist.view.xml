@@ -26,8 +26,8 @@ xmlns:vm="sap.ui.comp.variants" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar
                 showValueHelp="true" valueHelpOnly="true" valueHelpRequest="oProdValueHelpRequest">
 				 
                  <tokens>
-            <Token text="{text}" key="{text}"/>
-        </tokens>
+            <Token text="{objectModel>text}" key="{objectModel>text}"/>
+          </tokens>
 			
             </MultiInput>
                                     <!-- <Input value="{path:'objectModel>/filterBar/salesGroup'}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="oProdValueHelpRequest"/> -->
