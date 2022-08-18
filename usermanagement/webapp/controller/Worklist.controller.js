@@ -174,12 +174,12 @@ sap.ui.define(
             },
             onSalesGrpSelectionChange: function (oEvent) {
                
-                var aSelectedLineItems= this.byId("idList").getSelectedItems(),
-              
-                  for (var i = 0; i < aSelectedLineItems.length; i++) {
+                var aSelectedLineItems= this.byId("idList").getSelectedItems();
+                this.aSelKeys = [];
+                for (var i = 0; i < aSelectedLineItems.length; i++) {
                       this.aSelKeys.push(aSelectedLineItems[i].getBindingContext().getObject());
                   }
-                  this.getView().getModel("objectModel").setProperty("/filterBar/salesGroup'", aSelKeys);
+                  this.getView().getModel("objectModel").setProperty("/filterBar/salesGroup'", this.aSelKeys);
               },
             handleSortDialogConfirm: function (oEvent) {
                 var sSortValue = oEvent.getParameters().sortItem ? oEvent.getParameters().sortItem.getKey() : null,
@@ -319,15 +319,7 @@ sap.ui.define(
                     }.bind(this)
                 );
             },
-            onSalesGrpSelectionChange: function () {
-               
-                var aSelectedLineItems= this.byId("idList").getSelectedItems(),
-                  aSelKeys = [];
-                  for (var i = 0; i < aSelectedLineItems.length; i++) {
-                      this.aSelKeys.push(aSelectedLineItems[i].getBindingContext().getObject());
-                  }
-                  this.getView().getModel("objectModel").setProperty("/filterBar/salesGroup'", this.aSelKeys);
-              },
+          
             onSalesGroupDialogClose: function () {
                 var aSelectedSalesGroupItems = this.byId("idList").getSelectedItems(),
                     aTockes = [];
