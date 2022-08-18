@@ -88,7 +88,9 @@ sap.ui.define(
                  */
                 var othat = this;
                 var oView = this.getView();
-                this.aSelectedKeys = [];
+                var oModelControl = oView.getModel("oModelControl");
+                var c1, c2, c3, c4;
+                // oModelControl.setProperty("/PageBusy", true)
                 c1 = othat._addSearchFieldAssociationToFB();
             },
             _addSearchFieldAssociationToFB: function () {
@@ -171,16 +173,20 @@ sap.ui.define(
                 this._oSortDialog.open();
             },
             onSalesGrpSelectionChange: function (oEvent) {
-                var aSelectedLineItems = oEvent.getSource().getSelectedItems();
-                
-                   this.aSelectedKeys = aSelectedLineItems.map(function(items){
+
+                var aExistingItems =  this.getView().getModel("objectModel").getProperty("/filterBar/salesGroup");
+                var aSelectedLineItems = oEvent.getSource().getSelectedItems(),
+                    aSelectedKeys = [];
+                    aSelectedKeys = aSelectedLineItems.map(function(items){
                         return {
                             text: items.getBindingContext().getObject().SALES_GRP
                         
                         }; 
                     });
-               
-                this.getView().getModel("objectModel").setProperty("/filterBar/salesGroup",  this.aSelectedKeys);
+
+                    var aUpdatedItems = [...aExistingItems, ...aSelectedLineItems];
+                
+                this.getView().getModel("objectModel").setProperty("/filterBar/salesGroup", aUpdatedItems);
             },
             handleSortDialogConfirm: function (oEvent) {
                 var sSortValue = oEvent.getParameters().sortItem ? oEvent.getParameters().sortItem.getKey() : null,
