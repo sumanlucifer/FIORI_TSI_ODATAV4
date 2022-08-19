@@ -12,8 +12,6 @@
 		</subHeader>
 		<List
 			id="idList"
-		
-          
 			selectionChange=".onSalesGrpSelectionChange"
 			mode="MultiSelect"
 			growing="true"
@@ -35,12 +33,10 @@
 			</dependents>
 		</List>
         <beginButton>
-			<Button text="{i18n>Close}" press="onSalesGroupDialogClose"/>
-            
+        	<Button type="Emphasized" text="{i18n>Cancel}" press="onSalesGroupDialogCancel"/>
 		</beginButton>
 		<endButton>
-			
-            	<Button text="{i18n>Cancel}" press="onSalesGroupDialogCancel"/>
+            	<Button type="Emphasized" text="{i18n>Close}"  press="onSalesGroupDialogClose"/>
 		</endButton>
 	</Dialog>
 </core:FragmentDefinition>
