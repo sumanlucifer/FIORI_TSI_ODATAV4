@@ -199,6 +199,12 @@ sap.ui.define(
                     bSortColumn = bSortColumn ? "DESC" : "ASC";
                 this.getUserList(null, null, null, null, null, bSortColumn, sSortValue);
             },
+            onSalesGroupDialogCancel : function()
+            {
+                this.byId("idList").removeSelections();
+                this._oDialog.close();
+                this.getView().getModel("objectModel").setProperty("/filterBar/salesGroup", null);
+            },
             onDataExport: sap.m.Table.prototype.exportData || function () {
                 var oModel = this.getView().getModel("oModelControl");
                 var oExport = new Export({
