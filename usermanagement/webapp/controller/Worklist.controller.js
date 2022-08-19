@@ -184,7 +184,7 @@ sap.ui.define(
                 var aUpdatedItems = aExistingItems ? [...aExistingItems, ...aSelectedKeys] : aSelectedKeys;
                 var uniqueText = [];
                 var unique = aUpdatedItems.filter(element => {
-                    isDuplicate = uniqueText.includes(element.text);
+                   var isDuplicate = uniqueText.includes(element.text);
                     if (!isDuplicate) {
                         uniqueText.push(element.text);
                         return true;
