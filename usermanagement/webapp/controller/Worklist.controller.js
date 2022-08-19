@@ -173,20 +173,25 @@ sap.ui.define(
                 this._oSortDialog.open();
             },
             onSalesGrpSelectionChange: function (oEvent) {
-
-                var aExistingItems =  this.getView().getModel("objectModel").getProperty("/filterBar/salesGroup") ?  this.getView().getModel("objectModel").getProperty("/filterBar/salesGroup") : null;
+                var aExistingItems = this.getView().getModel("objectModel").getProperty("/filterBar/salesGroup") ? this.getView().getModel("objectModel").getProperty("/filterBar/salesGroup") : null;
                 var aSelectedLineItems = oEvent.getSource().getSelectedItems();
-               var aSelectedKeys = [];
-                    aSelectedKeys = aSelectedLineItems.map(function(items){
-                        return {
-                            text: items.getBindingContext().getObject().SALES_GRP
-                        
-                        }; 
-                    });
-
-                    var aUpdatedItems = aExistingItems ?  [...aExistingItems, ...aSelectedKeys] : aSelectedKeys;
-                
-                this.getView().getModel("objectModel").setProperty("/filterBar/salesGroup", aUpdatedItems);
+                var aSelectedKeys = [];
+                aSelectedKeys = aSelectedLineItems.map(function (items) {
+                    return {
+                        text: items.getBindingContext().getObject().SALES_GRP
+                    };
+                });
+                var aUpdatedItems = aExistingItems ? [...aExistingItems, ...aSelectedKeys] : aSelectedKeys;
+                var uniqueText = [];
+                var unique = aUpdatedItems.filter(element => {
+                    isDuplicate = uniqueText.includes(element.text);
+                    if (!isDuplicate) {
+                        uniqueText.push(element.text);
+                        return true;
+                    }
+                    return false;
+                });
+                this.getView().getModel("objectModel").setProperty("/filterBar/salesGroup", unique);
             },
             handleSortDialogConfirm: function (oEvent) {
                 var sSortValue = oEvent.getParameters().sortItem ? oEvent.getParameters().sortItem.getKey() : null,
@@ -281,7 +286,6 @@ sap.ui.define(
                 }
             },
             onSearchSalesGroup: function () {
-               
                 var sSearchSaleGrpVal = this.getView().getModel("objectModel").getProperty("/filterBar/salesGroupSearchVal");
                 this.getView().getModel("objectModel").setProperty("/PageBusy", true);
                 var oList = this.getView().byId("idList");
@@ -289,7 +293,6 @@ sap.ui.define(
                 var sBindingPath = "/getSalesGroupList(searchText='" + sSearchSaleGrpVal + "')";
                 oList.bindItems(sBindingPath, oSList);
                 this.getView().getModel("objectModel").setProperty("/PageBusy", false);
-               
             },
             onResetFilterBar: function () {
                 this._ResetFilterBar();
