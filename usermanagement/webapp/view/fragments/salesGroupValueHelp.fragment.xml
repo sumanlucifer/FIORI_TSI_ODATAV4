@@ -34,8 +34,12 @@
 				iconInset="false" />
 			</dependents>
 		</List>
-		<endButton>
+        <beginButton>
 			<Button text="{i18n>Close}" press="onSalesGroupDialogClose"/>
+            
+		</beginButton>
+		<endButton>
+			
             	<Button text="{i18n>Cancel}" press="onSalesGroupDialogCancel"/>
 		</endButton>
 	</Dialog>
