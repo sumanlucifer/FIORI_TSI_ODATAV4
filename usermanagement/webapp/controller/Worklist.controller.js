@@ -336,7 +336,7 @@ sap.ui.define(
                 this.onSearchSalesGroup();
                 this.byId("idList").removeSelections();
                 this._oDialog.close();
-                this.getView().getModel("objectModel").setProperty("/filterBar/salesGroup", null);
+               
             },
         });
     });
