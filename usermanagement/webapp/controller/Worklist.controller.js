@@ -329,13 +329,7 @@ sap.ui.define(
                 );
             },
             onSalesGroupDialogClose: function () {
-                // var aSelectedSalesGroupItems = this.byId("idList").getSelectedItems(),
-                //     aTockes = [];
-                // for (var i = 0; i < aSelectedSalesGroupItems.length; i++) {
-                //     var sSALES_GRP = aSelectedSalesGroupItems[i].getBindingContext().getObject().SALES_GRP;
-                //     aTockes.push(new sap.m.Token({ text: sSALES_GRP }));
-                // }
-                // this.byId("idsalesGroupMINP").setTokens(aTockes);
+                this.onSearchSalesGroup();
                 this.byId("idList").removeSelections();
                 this._oDialog.close();
             },
