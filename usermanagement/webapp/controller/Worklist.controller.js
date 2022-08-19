@@ -191,7 +191,7 @@ sap.ui.define(
                     }
                     return false;
                 });
-                this.getView().getModel("objectModel").setProperty("/filterBar/salesGroup", uniqueText);
+                this.getView().getModel("objectModel").setProperty("/filterBar/salesGroup", unique);
             },
             handleSortDialogConfirm: function (oEvent) {
                 var sSortValue = oEvent.getParameters().sortItem ? oEvent.getParameters().sortItem.getKey() : null,
