@@ -191,7 +191,7 @@ sap.ui.define(
                     }
                     return false;
                 });
-                this.getView().getModel("objectModel").setProperty("/filterBar/salesGroup", unique);
+                this.getView().getModel("objectModel").setProperty("/filterBar/salesGroup", uniqueText);
             },
             handleSortDialogConfirm: function (oEvent) {
                 var sSortValue = oEvent.getParameters().sortItem ? oEvent.getParameters().sortItem.getKey() : null,
@@ -330,7 +330,7 @@ sap.ui.define(
                 //     aTockes.push(new sap.m.Token({ text: sSALES_GRP }));
                 // }
                 // this.byId("idsalesGroupMINP").setTokens(aTockes);
-                // this.byId("idList").removeSelections();
+                this.byId("idList").removeSelections();
                 this._oDialog.close();
             },
         });
