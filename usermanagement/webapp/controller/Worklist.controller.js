@@ -201,8 +201,11 @@ sap.ui.define(
             },
             onSalesGroupDialogCancel : function()
             {
+                this.getView().getModel("objectModel").setProperty("/filterBar/salesGroupSearchVal", "")
+                this.onSearchSalesGroup();
                 this.byId("idList").removeSelections();
                 this._oDialog.close();
+
                 this.getView().getModel("objectModel").setProperty("/filterBar/salesGroup", null);
             },
             onDataExport: sap.m.Table.prototype.exportData || function () {
@@ -333,6 +336,7 @@ sap.ui.define(
                 this.onSearchSalesGroup();
                 this.byId("idList").removeSelections();
                 this._oDialog.close();
+                this.getView().getModel("objectModel").setProperty("/filterBar/salesGroup", null);
             },
         });
     });
