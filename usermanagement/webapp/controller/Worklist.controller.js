@@ -159,9 +159,20 @@ sap.ui.define(
                 }
                 return aTokenIDs;
             },
-            // onSort: function () {
-            //     this.getUserList(null, null, null, null, null, "ASC", "FIRST_NAME");
-            // },
+            handlesalesGroupTockenDelete: function (oEvent) {
+                if (oEvent.getParameters().type === 'removed') {
+                    var aRemovedTokens = oEvent.getParameters("type").removedTokens;
+                    var aExistingTokens = this.getView().getModel("objectModel").getProperty("/filterBar/salesGroup");
+                    aRemovedTokens.forEach((TokenObj,pos) => {
+                        aRemovedTokens[pos] = TokenObj.getText();
+                    })
+                    for (var i = 0; i < aExistingTokens.length; i++){
+                        if (aRemovedTokens.includes(aExistingTokens[i].text))
+                            aExistingTokens.splice(i, 1);
+                    }
+                    this.getView().getModel("objectModel").setProperty("/filterBar/salesGroup",aExistingTokens);
+                }
+            },
             onSort: function () {
                 if (!this._oSortDialog) {
                     this._oSortDialog = sap.ui.xmlfragment("com.knpl.tsi.usermanagement.view.fragments.SortDialog", this);
@@ -184,7 +195,7 @@ sap.ui.define(
                 var aUpdatedItems = aExistingItems ? [...aExistingItems, ...aSelectedKeys] : aSelectedKeys;
                 var uniqueText = [];
                 var unique = aUpdatedItems.filter(element => {
-                   var isDuplicate = uniqueText.includes(element.text);
+                    var isDuplicate = uniqueText.includes(element.text);
                     if (!isDuplicate) {
                         uniqueText.push(element.text);
                         return true;
@@ -199,8 +210,7 @@ sap.ui.define(
                     bSortColumn = bSortColumn ? "DESC" : "ASC";
                 this.getUserList(null, null, null, null, null, bSortColumn, sSortValue);
             },
-            onSalesGroupDialogCancel : function()
-            {
+            onSalesGroupDialogCancel: function () {
                 this.getView().getModel("objectModel").setProperty("/filterBar/salesGroupSearchVal", "")
                 this.onSearchSalesGroup();
                 this.byId("idList").removeSelections();
@@ -336,7 +346,7 @@ sap.ui.define(
                 this.onSearchSalesGroup();
                 this.byId("idList").removeSelections();
                 this._oDialog.close();
-               
+
             },
         });
     });

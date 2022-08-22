@@ -9,35 +9,22 @@ xmlns:vm="sap.ui.comp.variants" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar
     <f:DynamicPage busyIndicatorDelay="0" showFooter="true" busy="{objectModel>/PageBusy}" id="dynamicPageId" headerExpanded="true">
         <f:header>
             <f:DynamicPageHeader pinnable="true">
-                             <f:content>
-
-<fb:FilterBar id="filterbar" showRestoreOnFB="true" reset="onResetFilterBar" search="onSearch" useToolbar="false" showGoOnFB="true">
-
-<fb:filterGroupItems>
-<fb:FilterGroupItem groupName="__$INTERNAL$" name="group" label="{i18n>salesgroup}" visibleInFilterBar="true" class="searchFieldLabelHidden">
-                                 <fb:control>
-                                 <MultiInput
-                                 
-				id="idsalesGroupMINP"
-            
-				tokenDelete="handlesalesGroupTockenDelete"				
-				valueHelpTrigger="handleValueHelpTrigger"
-                tokens="{path:'objectModel>/filterBar/salesGroup'}"
-                showValueHelp="true" valueHelpOnly="true" valueHelpRequest="oProdValueHelpRequest">
-				 
-                 <tokens>
-            <Token text="{objectModel>text}" key="{objectModel>text}"/>
-          </tokens>
-			
-            </MultiInput>
-                                    <!-- <Input value="{path:'objectModel>/filterBar/salesGroup'}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="oProdValueHelpRequest"/> -->
+                <f:content>
+                    <fb:FilterBar id="filterbar" showRestoreOnFB="true" reset="onResetFilterBar" search="onSearch" useToolbar="false" showGoOnFB="true">
+                        <fb:filterGroupItems>
+                            <fb:FilterGroupItem groupName="__$INTERNAL$" name="group" label="{i18n>salesgroup}" visibleInFilterBar="true" class="searchFieldLabelHidden">
+                                <fb:control>
+                                    <MultiInput
+                                        id="idsalesGroupMINP"
+                                        tokenUpdate="handlesalesGroupTockenDelete"				
+                                        valueHelpTrigger="handleValueHelpTrigger"
+                                        tokens="{path:'objectModel>/filterBar/salesGroup'}"
+                                        showValueHelp="true" valueHelpOnly="true" valueHelpRequest="oProdValueHelpRequest">
+                                        <tokens>
+                                            <Token text="{objectModel>text}" key="{objectModel>text}"/>
+                                        </tokens>
+                                    </MultiInput>
                                 </fb:control>
-
-                                <!-- <fb:control>
-                                    <MultiComboBox items="{/getSalesGroupList()}" placeholder="{i18n>Enter} {i18n>status}" selectedKeys="{oModelControl>/filterBar/SelectedSalesGroup}">
-                                        <core:Item text="{SALES_GRP}" key="Accepted"/>
-                                    </MultiComboBox>
-                                </fb:control> -->
                             </fb:FilterGroupItem>
                             <fb:FilterGroupItem groupName="__$INTERNAL$" name="Status" label="{i18n>appstatus}" visibleInFilterBar="true" class="searchFieldLabelHidden">
                                 <fb:control>
@@ -47,20 +34,13 @@ xmlns:vm="sap.ui.comp.variants" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar
                                     </ComboBox>
                                 </fb:control>
                             </fb:FilterGroupItem>
-</fb:filterGroupItems>
-
-</fb:FilterBar>
-
-</f:content>
+                        </fb:filterGroupItems>
+                    </fb:FilterBar>
+                </f:content>
             </f:DynamicPageHeader>
         </f:header>
         <f:content>
               <core:Fragment fragmentName="com.knpl.tsi.usermanagement.view.fragments.usermanage" type="XML"/>
         </f:content>
-        <!-- <f:footer>
-			<OverflowToolbar>
-				   <Button text="More" press="onLoadMoreData" width="100%"/>
-			</OverflowToolbar>
-		</f:footer> -->
     </f:DynamicPage>
 </mvc:View>
