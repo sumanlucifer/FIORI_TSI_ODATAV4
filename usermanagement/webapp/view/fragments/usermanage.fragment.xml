@@ -51,7 +51,7 @@
                     <Text class="sapUiSmallMarginBegin" text="{oModelControl>SALES_GROUP}"/>
                     <Text class="sapUiSmallMarginBegin" text="{= ${oModelControl>APP_VERSION} !== null ? ${oModelControl>APP_VERSION} : '--'}" />
                     <Text text="{oModelControl>APP_STATUS}"/>
-                    <Text text="{path:'oModelControl>LAST_LOGIN_AT',formatter:'.formatter.getDateTime'}"/>
+                    <Text text="{path:'oModelControl>LAST_LOGIN_TIME',formatter:'.formatter.getDateTime'}"/>
                     <ObjectStatus text="{oModelControl>STATUS}" state="{= ${oModelControl>IS_ACTIVATED} === 1  ? 'Success' : 'Error' }"/> 
                     <HBox>
                         <Button text="{i18n>Deactivate}"  visible="{= ${oModelControl>IS_ACTIVATED} === 1  ? true : false}" press="onPressApproveReject" type="Reject" tooltip="{i18n>Deactivate}"/>
