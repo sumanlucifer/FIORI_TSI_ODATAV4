@@ -264,7 +264,7 @@ sap.ui.define(
                     {
                         name: "Login Date & Time",
                         template: {
-                            content: "{= ${LAST_LOGIN_AT} !== null ? ${LAST_LOGIN_AT} : '--'}"
+                            content: "{= ${LAST_LOGIN_TIME} !== null ? ${LAST_LOGIN_TIME} : '--'}"
                         }
                     },
                     {
